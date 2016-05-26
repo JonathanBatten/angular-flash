@@ -159,6 +159,9 @@ app.provider('Flash', function() {
                 flash.timeout = timeout;
             }
             $rootScope.flashes.push(flash);
+            $timeout(function() {
+                $rootScope.$apply();
+            }, 0);
             if (flash.timeout) {
                 flash.timeoutObj = $timeout(function() {
                     $this.dismiss(flash.id);
