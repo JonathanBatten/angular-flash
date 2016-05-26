@@ -1,4 +1,4 @@
-/*! angular-flash - v2.3.0 - 2016-04-24
+/*! angular-flash - v2.3.0 - 2016-05-26
 * https://github.com/sachinchoolur/angular-flash
 * Copyright (c) 2016 Sachin; Licensed MIT */
 
@@ -69,7 +69,7 @@ app.directive('flashMessage', ['Flash', function (Flash) {
             }
         },
         transclude: Flash.config.templateTransclude,
-        template: '\n                <div ng-repeat="flash in $root.flashes track by $index">\n                    ' + Flash.config.template + '\n                </div>\n            '
+        template: '\n                <div role="alert" ng-repeat="flash in $root.flashes track by $index" id="{{flash.config.id}}"\n                    class="alert {{flash.config.class}} alert-{{flash.type}} alert-dismissible alertIn alertOut">\n                    ' + Flash.config.template + '\n                </div>\n            '
     };
 }]);
 
@@ -77,7 +77,7 @@ app.provider('Flash', function () {
     var defaultConfig = {};
     var templatePresets = {
         bootstrap: {
-            html: '\n                <div role="alert" id="{{flash.config.id}}"\n                    class="alert {{flash.config.class}} alert-{{flash.type}} alert-dismissible alertIn alertOut">\n                    <div type="button" class="close" ng-show="flash.showClose" close-flash="{{flash.id}}">\n                        <span aria-hidden="true">&times;</span>\n                        <span class="sr-only">Close</span>\n                    </div>\n                    <span dynamic="flash.text"></span>\n                </div>',
+            html: '\n                <div type="button" class="close" ng-show="flash.showClose" close-flash="{{flash.id}}">\n                    <span aria-hidden="true">&times;</span>\n                    <span class="sr-only">Close</span>\n                </div>\n                <span dynamic="flash.text"></span>',
             transclude: false
         },
         transclude: {
