@@ -73,7 +73,8 @@ app.directive('flashMessage', [
             },
             transclude: Flash.config.templateTransclude,
             template: `
-                <div ng-repeat="flash in $root.flashes track by $index">
+                <div role="alert" ng-repeat="flash in $root.flashes track by $index" id="{{flash.config.id}}"
+                    class="alert {{flash.config.class}} alert-{{flash.type}} alert-dismissible alertIn alertOut">
                     ` + Flash.config.template + `
                 </div>
             `
@@ -86,14 +87,11 @@ app.provider('Flash', function() {
     let templatePresets = {
         bootstrap: {
             html: `
-                <div role="alert" id="{{flash.config.id}}"
-                    class="alert {{flash.config.class}} alert-{{flash.type}} alert-dismissible alertIn alertOut">
-                    <div type="button" class="close" ng-show="flash.showClose" close-flash="{{flash.id}}">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </div>
-                    <span dynamic="flash.text"></span>
-                </div>`,
+                <div type="button" class="close" ng-show="flash.showClose" close-flash="{{flash.id}}">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </div>
+                <span dynamic="flash.text"></span>`,
             transclude: false
         },
         transclude: {
